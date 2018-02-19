@@ -1,0 +1,44 @@
+<?php if (! defined('BASEPATH')) exit('No direct script access Hallowed');
+class Cpelanggan extends Shallom
+{
+ function __construct()
+ {
+	parent::__construct();
+	/*
+	$this->load->helper(array('url','form'));
+	$this->load->database();
+	$this->load->library(array('form_validation','table'));
+	$this->load->model('users_model');
+	$this->cek_login('Pelanggan');*/
+ }
+ 
+ function profil(){
+	$this->template('/pelanggan/profil','Informasi Akun');
+ }
+ function ganti_profil(){
+	$this->template('/pelanggan/ganti_profil','Ganti Profil');
+ }
+ function daftar_transaksi(){
+	$this->template('/pelanggan/daftar_transaksi','Daftar Transaksi');
+ }
+ function detail_transaksi(){
+	$this->template('/pelanggan/detail_transaksi','Detail Transaksi');
+ }
+ function detail_transaksi(){
+	$this->template('/pelanggan/konfirmasi_transaksi','Konfirmasi Transaksi');
+ }
+ function pesan(){
+	$this->template('/pelanggan/pesan','Pemesanan Produk');
+ }
+ function garofil($halaman = '/pelanggan/Vprofil')
+ {
+	$data['title']="Informasi Akun";
+	$data['judul']="Informasi Akun";
+	$data['css']="tema.css";
+	$profil = $this->users_model->get_login_info($this->session->username);
+	$data['username']=$profil->username;
+	$data['email']=$profil->email;
+	$data['nohp']=$profil->nohp;
+	$this->load->view($halaman, $data);
+ }
+}

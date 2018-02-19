@@ -1,0 +1,40 @@
+    <br />
+    <?php 
+    echo $this->session->flashdata('pesan');
+    if(empty($this->session->id_pengguna)){
+    ?>
+			<div class="alert alert-info alert-dismissable">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Pesan Penting!</strong><br/>Silahkan <a href="<?php echo base_url(); ?>masuk"><b>Masuk/Login</b></a> terlebih dahulu untuk melakukan pemesanan karangan bunga.</div>
+			<?php } ?>
+			<div class="well well-sm">
+			<?php
+			$acak = array('class'=>'form-inline');
+			echo form_open('pesan-acak',$acak);
+			?>
+			<div class='form-group '>
+				<label for="Tjumlah" class="label-control">Butuh berapa banyak karangan bunga ? </label>
+				<input id="Tjumlah" placeholder="Min. 1" class="form-control" type="numeric" name="Tjumlah" value=""  />
+			</div>
+			<button type="submit" class="btn btn-success">Pesan</button>
+			<?php
+			echo form_close();
+			?>Stok Karangan Bunga (Ukuran) : <?php echo $stok; ?>	
+			</div>
+	 </form>
+    </div>
+	<div class="container">    
+		<div class="row">
+    <?php
+    if(is_array($laporan)){
+	    foreach($laporan as $lap){
+	    ?>
+	    
+	            </div>
+	        </div>
+	    <?
+		}
+	}
+	else echo $laporan;
+	?>
+	
+    </div>

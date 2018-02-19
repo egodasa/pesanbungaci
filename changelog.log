@@ -1,0 +1,254 @@
+v0.1
+minggu 12 maret 2017 1523
+--------------------------
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda (data kosong)
+-ganti profil (data kosong)
+-daftar transaksi (data kosong)
+-detail transaksi (data kosong)
+-kelola pengguna (validasi error pas edit diawal)
+-kelola jenis pengguna (validasi error pas edit diawal)
+-kelola kota (validasi error pas edit diawal)
+tidak berfungsi :
+-pesan
+Message: Missing argument 1 for Cpelanggan::pesan()
+
+Filename: controllers/Cpelanggan.php
+
+Line Number: 53
+
+Backtrace:
+
+File: /run/media/media/Program/htdocs/mandan/application/controllers/Cpelanggan.php
+Line: 53
+Function: _error_handler
+
+File: /run/media/media/Program/htdocs/mandan/index.php
+Line: 315
+Function: require_once
+----------------------------
+
+v0.2
+selasa 14 maret 2017 2109
+------------------------------------------------
+perubahan :
+-pergantian nama jenis produk menjadi tipe produk
+-perubahan beberapa kontroler pada beberapa halaman (beranda,login,mendaftar)
+-pergantian model "access" menjadi "akses" dan model "users_model" menjadi "info_pengguna"
+
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda (data kosong)
+-ganti profil (data kosong)
+-daftar transaksi (data kosong)
+-detail transaksi (data kosong)
+-kelola pengguna (validasi error pas edit diawal)
+-kelola jenis pengguna (validasi error pas edit diawal)
+-kelola kota (validasi error pas edit diawal)
+-masuk
+-mendaftar
+----------------------------------------------------------
+
+v0.3
+kamis 16 maret 2017 2254
+-----------------------------------------------------------
+perubahan :
+-perbaikan masalah validasi yang terlalu awal pada halaman edit data
+-semua halaman kelola data internal berjalan dengan baik (CRUD)
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda (data kosong)
+-ganti profil (data kosong)
+-daftar transaksi (data kosong)
+-detail transaksi (data kosong)
+-kelola pengguna
+-kelola jenis pengguna 
+-kelola kota 
+-kelola produk 
+-kelola tipe produk 
+-masuk
+-mendaftar
+----------------------------------------------------------------
+
+v0.3.5
+sabtu 18 maret 1716
+---------------------------------------------------------------------
+perubahan :
+-penambahan fitur peringatan sebelum menghapus data
+-penambahan halaman kelola jenis acara
+-perubahan tombol aksi menjadi btn-group
+-penambahan fitur login dan logout yg bekerja
+-perubahan fungsi pada file akses.php, beberapa fungsi dipindahkan ke halaman individual
+------------------------------------------------------------------
+v0.4
+minggu 19 maret 2017 1506
+-----------------------------------------------------------------
+perubahan :
+-file-file yang tidak penting sudah dihapus
+-fitur pergantian username ditiadakan agar sistem lebih efisien.
+-pemberlakuan session pada halaman pelanggan dan admin
+-halaman baru yang bekerja (profil,ganti profil,ganti password)
+-menu dinamis diatas kanan berdasarkan hak akses pengguna
+
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda 
+-ganti profil
+-ganti password
+-daftar transaksi (data kosong)
+-detail transaksi (data kosong)
+-kelola pengguna
+-kelola jenis pengguna 
+-kelola jenis acara
+-kelola kota 
+-kelola produk 
+-kelola tipe produk 
+-masuk
+-mendaftar
+--------------------------------------------------------------------
+v0.4.5
+minggu 19 maret 2017 2150
+--------------------------------------------------------------------
+perubahan:
+-penambahan fitur pengaturan warna template untuk admin
+
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda 
+-ganti profil
+-ganti password
+-daftar transaksi (data kosong)
+-detail transaksi (data kosong)
+-kelola pengguna
+-kelola jenis pengguna 
+-kelola jenis acara
+-kelola kota 
+-kelola produk 
+-kelola tipe produk 
+-masuk
+-mendaftar
+-pengaturan
+--------------------------------------------------------------------
+v0.4.7
+31 maret 2017 1018
+--------------------------------------------------------------------
+perubahan :
+-penerapan pengaturan ke semua halaman melalui controller "MY_Controler" method "pengaturan"
+-halaman pesan produk yang bekerja
+-pengaturan menu yang dinamis sesuai user(sebatas menu login,register dan logout)
+-fungsi baru untuk memanggil data array ke combobox (data_combobox)
+-halaman daftar transaksi,detail transaksi baru
+-penambahan fitur pop up pesan sebelum menghapus data
+-perbaikan logika pemanggilan data laporan pengguna dan laporan transaksi
+-penambahan tabel baru (tbpembayaran)
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda 
+-ganti profil
+-ganti password
+-daftar transaksi (baru)
+-detail transaksi (baru)
+-kelola pengguna
+-kelola jenis pengguna 
+-kelola jenis acara
+-kelola kota 
+-kelola produk 
+-kelola tipe produk 
+-masuk
+-mendaftar
+-pengaturan
+
+v0.5
+3 april 2017 2310
+-------------------------------------------
+perubahan :
+-perubahan struktur table menyeluruh
+-penambahan halaman transaksi(konfirmasi,transaksi,batal transaksi)
+-perubahan desain laporan transaksi, fitur batal transaksi
+-menu dinamis antar pengguna
+-sidebar dihilangkan dan pemindahan menu ke atas
+halaman yang berfungsi :
+-beranda
+-cara pemesanan
+-hubungi kami
+-tentang kami
+-profil anda 
+-ganti profil
+-ganti password
+-daftar transaksi
+-detail transaksi
+-konfirmasi transaksi
+-validasi transaksi
+-kelola pengguna
+-kelola jenis pengguna 
+-kelola jenis acara
+-kelola kota 
+-kelola produk 
+-kelola tipe produk 
+-masuk
+-mendaftar
+-pengaturan
+
+v0.6
+minggu 13 april 2017 0026
+-------------------------------------------------------
+yang baru :
+-fitur pemesanan banyak berhasil ditambahkan
+-fitur cetak bon
+-perbaikan controller crud
+-fitur pencarian data pengguna
+
+perubahan :
+-pemesanan produk diganti dimana user akan mendapatkan karangan bunga acak
+-penyempurnaan dan pemerataan controller khusus CRUD
+
+bug :
+-form validasi masih belum bisa diterapkan pada field array
+-fitur pencarian belum sepenuhnya berjalan lancar
+
+v0.6.5
+minggu 16 april 2017 1718
+--------------------------------------------------------
+yang baru :
+-fitur pencarian data yang disempurnakan
+-penambahan kolom "ukuran" pada tabel "tipe_produk"
+
+perubahan :
+-penghapusan tombol "ulangi" pada beberapa halaman karena tombol tidak bekerja dengan baik sejak pertama kali dibuat
+-penghapusan file dan folder yang tidak diperlukan
+-desain beranda yang baru
+
+bug :
+-form validasi masih belum bisa diterapkan pada field array
+-desain beranda masih acakan
+
+v0.6.9
+jumat 21 april 2017 1133
+---------------------------------------------------------
+yang baru :
+-tampilan baru beranda
+
+perubahan :
+-pemerataan penulisan konten pada beberapa halaman
+
+bug :
+-form validasi masih belum bisa diterapkan pada field array

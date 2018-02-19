@@ -1,0 +1,8 @@
+1. Pastikan Xampp yang Anda gunakan memilik versi diatas 1.7.0 karena dibawah versi tersebut program tidak akan berjalan.
+2. Salin folder "shallum" kedalam folder "xampp/htdocs".
+3. Buka Mysql atau Phpmyadmin dan buat database baru dengan nama "dbshallom".
+4. Pilih menu import pada phpmyadmin dan pilih file "dbshallom.sql" pada folder "shallum".
+5. Untuk membuka program, silahkan buka browser dan ketikkan "localhost/shallum" pada adress bar.
+6. Untuk masuk sebagai admin,silahkan gunakan info dibawah ini dan klik menu "masuk".
+Username : admin
+Password : admin

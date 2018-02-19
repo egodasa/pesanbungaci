@@ -1,0 +1,129 @@
+<?php if (! defined('BASEPATH')) exit('No direct script access Hallowed');
+class Cpublik extends Shallom
+{
+ function __construct()
+ {
+	parent::__construct();
+	$this->load->helper(array('url','form'));
+	$this->load->database();
+	$this->load->library(array('form_validation','access','session'));
+	$this->load->model('Mpublik');
+ }
+ function beranda()
+ {
+ 	$this->template('/publik/beranda','Beranda');
+/*
+	if($this->access->cek_status_login() === TRUE)
+	{
+		switch($this->session->jenis)
+		{
+			case 'Admin' : $this->load->view('menu/Vadmin'); break;
+			case 'Pelanggan' : $this->load->view('menu/Vpelanggan'); break;
+			
+		}
+	} else $this->load->view('/menu/Vpublik');
+	$this->load->view('/publik/Vfooter');
+	*/
+ }
+ function tentang_kami(){
+ $this->template('/publik/tentang-kami','Tentang Shallom Flower'); 
+ }
+ function hubungi_kami(){
+ $this->template('/publik/hubungi-kami','Hubungi Shallom Flower'); 
+ }
+ function cara_pemesanan(){
+ $this->template('/publik/cara-pemesanan','Cara Pemesanan'); 
+ }
+ function mendaftar()
+ {
+ 	$this->template('/publik/mendaftar','Mendaftar akun baru');
+ 	/*
+	$this->access->cek_izin();
+	$data['title']="Registrasi";
+	$data['judul']="Pendaftaran Pengguna Baru";
+	$data['css']="tema.css";
+		if($this->form_validation->run() === TRUE)
+		{echo "<script>console.log('validasi form ok');</script>";
+			if($this->Mpublik->registrasi() === TRUE) 
+			{
+				echo "<script>console.log('registrasi ok');</script>";
+				redirect('login');
+			}
+			else echo "<script>console.log('registrasi gagal');</script>";
+		}
+		else
+		{
+			echo "<script>console.log('gagal validasi');</script>";
+			$this->load->view($halaman, $data);
+		}*/
+ }
+ 
+ function masuk()
+ {
+ 	$this->template('/publik/masuk','Masuk');
+ 	/*
+	$this->access->cek_izin();
+	$data['title']="Login";
+	$data['judul']="Login ke Website PO.NPM";
+	$data['css']="tema.css";
+	$data['pesan']="";
+	//$this->form_validation->set_rules('token', 'token','callback_check_login');
+		if($this->form_validation->run() == TRUE)
+		{
+			switch($this->session->jenis)
+			{
+			case 'Admin' : redirect('admin'); break;
+			case 'Administrasi' : redirect('administrasi'); break;
+			case 'Pelanggan' : redirect('user'); break;
+			case 'Pemimpin' : redirect('pimpinan'); break;
+			}
+		}
+	$this->load->view($halaman, $data);*/
+	}
+ function daftar_tiket($halaman = '/publik/Vtiket')
+ {
+	$this->load->library('table');
+	$data['title']="Daftar Tiket";
+	$data['judul']="Daftar Tiket Bus yang Tersedia di PO.NPM <u>Per Tanggal ".date('D, d M Y')."</u>";
+	$data['css']="tema.css";
+	$data['tiket']= $this->Mpublik->tiket();
+	$this->load->view($halaman, $data); 
+ }
+ 
+ function cek_sandi()
+ {
+	 $this->form_validation->set_message('cek_sandi','Kata Sandi tidak cocok!');
+	 $sandi1=md5($this->input->post('Tsandi1'));
+	 $sandi2=md5($this->input->post('Tsandi2'));
+	 if($sandi2 === $sandi1) return TRUE;
+	 else return FALSE;
+ }
+ function cocok_login()
+ {
+	$username = $this->input->post('Tusername',TRUE);
+	$password = $this->input->post('Tsandi',TRUE);
+	$login = $this->access->login($username, $password);
+		if($login)
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('cocok_login','Username atau password anda salah.');
+			return FALSE;
+		}
+}
+
+ function cek_login()
+ {
+	if($this->access->cek_status_login() === TRUE)
+	{
+		return TRUE;
+		redirect(' ');
+	} else return FALSE;
+}
+ function keluar()
+ {
+	 $this->access->logout();
+ }
+}

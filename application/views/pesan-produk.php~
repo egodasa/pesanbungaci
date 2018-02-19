@@ -1,0 +1,51 @@
+<h1>Pesan Produk</h1>
+<section>
+<form class="form-horizontal">
+<div class="form-group">
+<label class="control-label col-sm-2" for="Ttipe">Tipe Produk : </label>
+<div class="col-sm-10">
+<p class="form-control-static" id="Ttipe" name="Ttipe"><?php echo $nm_tipe; ?></p>
+</div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" for="Tgambar">Foto Produk : </label>
+<div class="col-sm-10">
+<p class="form-control-static" id="Tgambar" name="Tgambar" >
+	<img src="<?php echo base_url().'produk/'.$gambar; ?>" class="img img-thumbnail" />
+</p>
+</div>
+</div>
+</form>
+<?php
+echo form_open('pesan?id_produk='.$id_produk,'pesan');
+echo "<div class='form-group ".$this->session->flashdata('Tnm_pengirim')."'>".form_input('Nama Pengirim :','Min. 6 karakter','Tnm_pengirim',set_value('Tnm_pengirim'));
+echo form_error('Tnm_pengirim','<span class="help-block">','</span>');
+echo "</div>";
+
+echo "<div class='form-group ".$this->session->flashdata('Cjenis_acara')."'>".form_dropdown('Jenis Acara :','Cjenis_acara',$jenis_acara,set_select('Cjenis_acara'));
+echo form_error('Cjenis_acara','<span class="help-block">','</span>');
+echo "</div>";
+?>
+<?php
+echo "<div class='form-group ".$this->session->flashdata('Ckota')."'>".form_dropdown('Kota Tujuan :','Ckota',$kota,set_select('Ckota','0'));
+echo form_error('Ckota','<span class="help-block">','</span>');
+echo "</div>";
+
+echo "<div class='form-group ".$this->session->flashdata('Ttgl_kirim')."'>".form_input('Tanggal Dibutuhkan :','Contoh : 31-12-2016','Ttgl_kirim',set_value('Ttgl_kirim'));
+echo form_error('Tnm_pengirim','<span class="help-block">','</span>');
+echo "</div>";
+
+echo "<div class='form-group ".$this->session->flashdata('Tjam_kirim')."'>".form_input('Jam Dibutuhkan :','Contoh : 10:00','Tjam_pengirim',set_value('Tjam_kirim'));
+echo form_error('Tnm_pengirim','<span class="help-block">','</span>');
+echo "</div>";
+
+echo "<div class='form-group ".$this->session->flashdata('Talamat')."'>".form_textarea('Alamat Lengkap :','Maksimal 300 karakter','Talamat',set_value('Talamat'));
+echo form_error('Talamat','<span class="help-block">','</span>');
+echo "</div>";
+
+?>
+<button type="submit" class="btn btn-success">Proses</button>
+<a href="<?php echo base_url(); ?>" class="btn btn-primary">Kembali</a>
+</form>
+</section>
+<br />

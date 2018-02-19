@@ -1,0 +1,15 @@
+<html>
+<head>
+<title><?php echo $title; ?></title>
+<link href="<?php echo base_url().'css/'.$css; ?>" rel="stylesheet" />
+</head>
+
+<body>
+	<h1><?php echo $judul; ?></h1>
+	<ul>
+	<li><?php echo anchor('','Beranda','target="_new"'); ?></li>
+	<li><?php echo anchor('/daftar-tiket','Login','target="_new"'); ?></li>
+	<?php echo $menu; ?>
+	</ul>
+</body>
+</html>

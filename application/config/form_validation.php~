@@ -1,0 +1,211 @@
+<?php
+$config =
+array(
+'admin_data_pengguna'=>array(
+					array(
+					'field' => 'Tusername',
+					'label' => 'Username',
+					'rules' => 'required|max_length[12]|min_length[3]|alpha_dash|is_unique[tbpengguna.username]'
+						),
+					array(
+					'field' => 'Temail',
+					'label' => 'Email',
+					'rules' => 'valid_email|is_unique[tbpengguna.email]'
+						),
+					array(
+					'field' => 'Tnohp',
+					'label' => 'Nomor Handphone',
+					'rules' => 'required|min_length[12]|max_length[14]|numeric'
+						),
+					array(
+					'field' => 'Tsandi1',
+					'label' => 'Kata Sandi',
+					'rules' => 'required|max_length[20]|min_length[5]'
+						),
+					array(
+					'field' => 'Tsandi2',
+					'label' => 'Kata Sandi',
+					'rules' => 'required|max_length[20]|min_length[5]|matches[Tsandi1]'
+						),
+					array(
+					'field' => 'Cjenis',
+					'label' => 'Jenis Pengguna',
+					'rules' => 'callback_validasi_jenis'
+					)
+),
+'admin_edit_pengguna'=>array(
+					array(
+					'field' => 'Temail',
+					'label' => 'Email',
+					'rules' => 'valid_email|is_unique[tbpengguna.email]'
+						),
+					array(
+					'field' => 'Tnohp',
+					'label' => 'Nomor Handphone',
+					'rules' => 'required|min_length[12]|max_length[14]|numeric'
+						),
+					array(
+					'field' => 'Cjenis',
+					'label' => 'Jenis Pengguna',
+					'rules' => 'callback_validasi_jenis'
+					)
+),
+'admin_data_jenis_pengguna'=>array(
+			array(
+			'field' => 'Tnm_jenis',
+			'label' => 'Nama Jenis',
+			'rules' => 'required|min_length[3]|max_length[30]')
+),
+'admin_data_jenis_acara'=>array(
+			array(
+			'field' => 'Tnm_acara',
+			'label' => 'Nama Acara',
+			'rules' => 'required|min_length[3]|max_length[30]')
+),
+'admin_data_kota'=>array(
+			array(
+			'field' => 'Tnm_kota',
+			'label' => 'Nama Kota',
+			'rules' => 'required|min_length[3]|max_length[50]'
+			),
+			array(
+			'field' => 'Thrg_kota',
+			'label' => 'Tarif Kota',
+			'rules' => 'required|max_length[11]|numeric'
+			)
+),
+'admin_data_tipe_produk'=>array(
+			array(
+			'field' => 'Tnm_tipe',
+			'label' => 'Nama Tipe Produk',
+			'rules' => 'required|min_length[3]|max_length[30]'
+			),
+			array(
+			'field' => 'Thrg_tipe',
+			'label' => 'Harga Tipe Produk',
+			'rules' => 'required|max_length[11]|numeric'
+			)
+),
+'admin_tambah_produk'=>array(
+			array(
+			'field' => 'Ctipe',
+			'label' => 'Tipe Produk',
+			'rules' => 'callback_validasi_tipe'
+			),
+			array(
+			'field' => 'Tdeskripsi',
+			'label' => 'Deskripsi Produk',
+			'rules' => 'max_length[300]'
+			),
+			array(
+			'field' => 'Ugambar',
+			'label' => 'Foto Produk',
+			'rules' => 'callback_validasi_upload'
+			)
+),
+'publik_mendaftar'=>array(
+			array(
+			'field' => 'Tusername',
+			'label' => 'Username',
+			'rules' => 'required|is_unique[tbpengguna.username]|min_length[3]|max_length[12]'
+			),
+			array(
+			'field' => 'Tsandi1',
+			'label' => 'Kata Sandi',
+			'rules' => 'required'
+			),
+			array(
+			'field' => 'Tsandi2',
+			'label' => 'Kata Sandi',
+			'rules' => 'required|callback_cek_sandi'
+			),
+			array(
+			'field' => 'Tnohp',
+			'label' => 'Nomor Handphone',
+			'rules' => 'required|min_length[3]|max_length[14]|numeric'
+			),
+			array(
+			'field' => 'Temail',
+			'label' => 'Email',
+			'rules' => 'min_length[3]|max_length[30]|valid_email'
+			)
+),
+'publik_masuk'=>array(
+			array(
+			'field' => 'Tusername',
+			'label' => 'Username',
+			'rules' => 'required'
+			),
+			array(
+			'field' => 'Tsandi',
+			'label' => 'Kata Sandi',
+			'rules' => 'required'
+			),
+			array(
+			'field' => 'Tkecocokan',
+			'label' => 'Username dan Kata Sandi',
+			'rules' => 'callback_cek_login'
+			)
+),
+'ganti_profil'=>array(
+					array(
+					'field' => 'Temail',
+					'label' => 'Email',
+					'rules' => 'valid_email'
+						),
+					array(
+					'field' => 'Tnohp',
+					'label' => 'Nomor Handphone',
+					'rules' => 'required|min_length[12]|max_length[14]|numeric'
+						)
+),
+'ganti_password'=>array(
+					array(
+					'field' => 'Tsandi_lama',
+					'label' => 'Kata Sandi Lama',
+					'rules' => 'required|callback_cek_sandi'
+						),
+					array(
+					'field' => 'Tsandi1',
+					'label' => 'Kata Sandi',
+					'rules' => 'required|max_length[20]|min_length[5]'
+						),
+					array(
+					'field' => 'Tsandi2',
+					'label' => 'Kata Sandi',
+					'rules' => 'required|matches[Tsandi1]'
+						)
+),
+'pesan_produk'=>array(
+					array(
+					'field' => 'Tnm_pengirim',
+					'label' => 'Nama Pengirim',
+					'rules' => 'required|min_length[3]|max_length[30]'
+						),
+					array(
+					'field' => 'Cjenis_acara',
+					'label' => 'Jenis Acara',
+					'rules' => 'callback_cek_acara'
+						),
+					array(
+					'field' => 'Talamat',
+					'label' => 'Alamat Tujuan',
+					'rules' => 'required|min_length[5]|max_length[300]'
+						),
+					array(
+					'field' => 'Ckota',
+					'label' => 'Kota Tujuan',
+					'rules' => 'callback_cek_kota'
+						),
+					array(
+					'field' => 'Ttgl_kirim',
+					'label' => 'Tanggal Dibutuhkan',
+					'rules' => 'required|callback_cek_tgl|regex_match[/([1-9]|[012][0-9]|3[01])-([1-9]|[01][012])-(20[12][0-9])/]'
+						),
+					array(
+					'field' => 'Tjam_kirim',
+					'label' => 'Jam Dibutuhkan',
+					'rules' => 'required|callback_cek_jam|regex_match[/([0-9]|1[0-9]|2[0-4]):([0-9]|[1-5][0-9])/]'
+						)
+)
+);

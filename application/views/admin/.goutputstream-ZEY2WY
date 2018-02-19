@@ -1,0 +1,42 @@
+<br/>
+<fieldset>
+<legend>Data Tarif per Kota</legend>
+<?php
+echo $this->session->flashdata('pesan');
+if($this->input->get('status')== 'edit') echo '<div class="alert alert-success">Perubahan disimpan.</div>';
+else if($this->input->get('status')== 'tambah') echo '<div class="alert alert-success">Data Kota baru berhasil ditambahkan.</div>';
+else if($this->input->get('status')== 'hapus') echo '<div class="alert alert-success">Data Kota terpilih berhasil dihapus.</div>';
+else echo '  '; ?>
+<table class='table table-striped table-bordered'>
+<tr>
+<td>No</td>
+<td>ID</td>
+<td>Nama Kota</td>
+<td>Tarif</td>
+<td colspan=2>Aksi</td>
+</tr>
+<?php
+	$hitung = count($daftar_kota);
+	for ($i = 0; $i < $hitung; $i++) {
+    echo $daftar_kota[$i];
+	}
+?>
+</table>
+</fieldset> 	
+
+<br/>
+<fieldset>
+<legend>Tambah Data Kota baru :</legend>
+<?php 
+echo form_open('admin/kota','tambah-jenis-pengguna');
+echo "<div class='form-group ".$this->session->flashdata('Tnm_kota')."'>".form_input('Nama Kota :','Min. 6 karakter','Tnm_kota',set_value('Tnm_kota'));
+echo form_error('Tnm_kota','<span class="help-block">','</span>');
+echo "</div>";
+
+echo "<div class='form-group ".$this->session->flashdata('Thrg_kota')."'>".form_input('Tarif kota :','Rp.','Thrg_kota',set_value('Thrg_kota'));
+echo form_error('Thrg_kota','<span class="help-block">','</span>');
+echo "</div>";
+?>
+<button type="submit" class="btn btn-success"><span class='glyphicon glyphicon-plus-sign'></span> Simpan</button>
+<button type="reset" id="Breset" class="btn btn-danger"><span class='glyphicon glyphicon-repeat'></span> Ulangi</button>
+</form>

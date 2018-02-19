@@ -1,0 +1,46 @@
+<?php
+class Mberanda extends CI_Model {
+        public function __construct()
+        {
+                parent::__construct();
+        }
+       
+public function daftar_produk()
+		{
+			$kueri = $this->db->query('select tbproduk.id_produk as "id_produk",tbproduk.gambar as "gambar",tbtipe_produk.nm_tipe as "tipe",tbtipe_produk.hrg_tipe as "harga",deskripsi from tbproduk,tbtipe_produk where tbproduk.id_tipe=tbtipe_produk.id_tipe and tbproduk.id_status_produk=1 order by tbproduk.id_produk asc;')->result();
+			if($kueri){
+			foreach ($kueri as $isi)
+			{
+				$hasil[] = "
+        <div class='item  col-xs-12 col-lg-4'>
+            <div class='thumbnail'>
+                <img class='group list-group-image img-thumbnail' src='".base_url()."produk/".$isi->gambar."' alt='' width='400' height='250' />
+                <div class='caption'>
+					<h4 class='group inner list-group-item-heading'>".$isi->deskripsi."</h4>
+                    <h4 class='group inner list-group-item-heading'>Tipe : ".$isi->tipe."</h4>
+                    <div class='row'>
+                        <div class='col-xs-12 col-md-6'>
+                            <p class='lead'>
+                                Rp ".number_format($isi->harga,2,',','.')."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+				";
+			}}
+			else $hasil[] = "<p class='text-center'><strong>Produk Kosong!</strong></p>"; 
+			RETURN $hasil;
+		}
+public function pesan_acak($id_tipe){
+	$kueri = $this->db->query('select id_produk from tbproduk where id_tipe='.$id_tipe.' and id_status_produk <> 2 limit 1;')->row();
+	if($kueri) return $kueri->id_produk;
+	else return null;
+}
+public function hitung_stok(){
+	$standar = $this->db->query('select count(id_tipe) as "st" from tbproduk where id_tipe=1 and id_status_produk=1;')->row();
+	$double = $this->db->query('select count(id_tipe) as "db" from tbproduk where id_tipe=2 and id_status_produk=1;')->row();
+	$jumbo = $this->db->query('select count(id_tipe) as "jm" from tbproduk where id_tipe=3 and id_status_produk=1;')->row();
+	RETURN "Standar ".$standar->st.", Jumbo ".$double->db.", Double ".$jumbo->jm;
+	}
+}

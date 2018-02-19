@@ -1,0 +1,146 @@
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+class Pesan extends Shallom
+{
+ function __construct()
+ {
+	parent::__construct();
+	$this->load->library('akses');
+	$this->akses->cek_login();
+	$this->load->database();
+	$this->load->model('Mpesan');
+}
+ function pesan_produk(){
+	 
+	 /*
+	  alur logika halaman pesan produk
+	  buka beranda
+	  * klik produk
+	  * ambil data produk untuk ditampilkan ke halaman produk menggukanan id produk
+	  * isi data
+	  * validasi
+	  * jika benar maka semua data disimpan ke flashdata untuk ditampilkan ke halaman detail pesan
+	  * beberapa data akan di keep flashdata
+	  */
+	
+	$data = $this->Mpesan->ambil_produk($this->input->get('id_produk')); //mengambil data produk terpilih pakai id dari db
+	$kota = $this->Mpesan->ket_kota($this->input->post('Ckota'));
+	$acara = $this->Mpesan->ket_acara($this->input->post('Cjenis_acara'));
+	if($this->form_validation->run('pesan_produk') == TRUE){
+		//value untuk dibawa kehalaman pesan selanjutnya
+		$this->session->set_flashdata('id_produk',$this->input->get('id_produk')); //simpan id produk untuk di insert ke db
+		$this->session->set_flashdata('tipe',$data['nm_tipe']); 
+		$this->session->set_flashdata('id_tipe',$data['id_tipe']); 
+		$this->session->set_flashdata('hrg_tipe',$data['hrg_tipe']); 
+		$this->session->set_flashdata('gambar',$data['gambar']);
+		$this->session->set_flashdata('nm',$this->input->post('Tnm_pengirim')); 
+		$this->session->set_flashdata('alamat',$this->input->post('Talamat'));
+		$this->session->set_flashdata('tgl',$this->input->post('Ttgl_kirim'));
+		$this->session->set_flashdata('id_kota',$kota->id_kota);
+		$this->session->set_flashdata('kota',$kota->nm_kota);
+		$this->session->set_flashdata('hrg_kota',$kota->hrg_kota);
+		$this->session->set_flashdata('id_acara',$acara->id_acara);
+		$this->session->set_flashdata('acara',$acara->nm_acara);
+		$hrg = $kota->hrg_kota+$data['hrg_tipe'];
+		$this->session->set_flashdata('acara',$acara->nm_acara);
+		$this->session->set_flashdata('total_biaya',$hrg);
+		//value untuk dibawa kehalaman pesan selanjutnya
+		redirect('pesan/detail');
+	}
+	else
+	{
+		if(empty(form_error('Tnm_pengirim'))){
+			$this->konsol('Tnm_pengirim error kosong');
+			$this->session->set_flashdata('Tnm_pengirim','');
+		}
+		else{
+			$this->konsol('Tnm_pengirim error berisi');
+			$this->session->set_flashdata('Tnm_pengirim','has-error');
+		}
+		
+		if(empty(form_error('Cjenis_acara'))){
+			$this->konsol('Cjenis_acara error kosong');
+			$this->session->set_flashdata('Cjenis_acara','');
+		}
+		else{
+			$this->konsol('Cjenis_acara error berisi');
+			$this->session->set_flashdata('Cjenis_acara','has-error');
+		}
+		
+		if(empty(form_error('Ckota'))){
+			$this->konsol('Ckota error kosong');
+			$this->session->set_flashdata('Ckota','');
+		}
+		else{
+			$this->konsol('Ckota error berisi');
+			$this->session->set_flashdata('Ckota','has-error');
+		}
+		
+		if(empty(form_error('Talamat'))){
+			$this->konsol('Talamat error kosong');
+			$this->session->set_flashdata('Talamat','');
+		}
+		else{
+			$this->konsol('Talamat error berisi');
+			$this->session->set_flashdata('Talamat','has-error');
+		}
+	}
+	$data['kota'] = $this->data_combobox($this->db->get('tbkota')->result(),'id_kota','nm_kota','-- Silahkan Pilih Kota Tujuan --');
+	$data['jenis_acara'] = $this->data_combobox($this->db->get('tbjenis_acara')->result(),'id_acara','nm_acara','-- Silahkan Pilih Jenis Acara --');
+	$data['judul'] = 'Pesan Produk';
+	$this->load->view('/template/2/head',$data);
+	$this->load->view('/template/2/style',$this->pengaturan);
+	$this->load->view('/template/2/navbar',$data);
+	$this->load->view('/template/2/sidebar',$data);
+	$this->load->view('pesan-produk',$data);
+	$this->load->view('/template/2/footer');
+ }
+ 
+ function detail_pesan(){
+	 /*
+	  * halaman sudah berisi informasi produk dan data pengguna dari halaman sebelumnya (pesan produk) via flashdata
+	  * klik pesan
+	  * data dihalaman akan dibawa kehalaman proses
+	  * dihalaman proses data di input kedatabase
+	  * jika terjadi kesalahan pesan error muncul dan diredirect ke beranda
+	  * jika lancar akan diredirect ke halaman daftar transaksi
+	  */
+	$this->session->keep_flashdata(array('id_produk','id_tipe','nm_pengirim','alamat','tgl','id_kota','id_acara','total_biaya'));
+	if(empty($this->session->flashdata('id_produk'))) redirect('');
+	else {
+	$data['judul'] = 'Detail Pesanan';
+	$this->load->view('/template/2/head',$data);
+	$this->load->view('/template/2/style',$this->pengaturan);
+	$this->load->view('/template/2/navbar',$data);
+	$this->load->view('/template/2/sidebar',$data);
+	$this->load->view('detail-pesan',$data);
+	$this->load->view('/template/2/footer');
+	}
+ }
+ function proses_pesan(){
+/*
+  * data dari halaman sebelumnya dipanggil dan dimasukkan ke array
+  * data array dimasukan ke fungsi model proses_pesan
+  */
+	if($this->Mpesan->proses_pesan()){
+	$this->session->flashdata('pesan','Pesanan berhasil diproses. Silahkan lakukan konfirmasi pembayaran!');
+	}
+	else $this->session->flashdata('pesan','Telah terjadi kesalahan pada sistem!');
+	redirect('');
+ }
+ 
+ function cek_acara(){
+ if($this->input->post('Cjenis_acara') == "0"){
+	$this->form_validation->set_message('cek_acara','Silahkan pilih jenis acara.'); 
+	RETURN FALSE;
+ }
+ else RETURN TRUE;
+ }
+ 
+ function cek_kota(){
+ if($this->input->post('Ckota') == "0"){
+	$this->form_validation->set_message('cek_kota','Silahkan pilih kota.'); 
+	RETURN FALSE;
+ }
+ else RETURN TRUE;
+ }
+}

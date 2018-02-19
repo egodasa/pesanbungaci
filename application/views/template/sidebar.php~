@@ -1,0 +1,17 @@
+<div class="list-group">
+			<li class="list-group-item active">Kontak Kami</li>
+			<li class="list-group-item">
+				<span class="glyphicon glyphicon-phone-alt"></span>  083825710239<br/>
+				<span class="glyphicon glyphicon-phone"></span>  0821943859937<br/>
+			</li>
+			</div>
+        <div class="list-group">
+          <li class="list-group-item active">Menu Pelanggan</li>
+          <a href="<?php echo base_url().'user/profil'; ?>" class="list-group-item">Profil Anda</a>
+          <a href="<?php echo base_url().'user/ganti-profil'; ?>" class="list-group-item">Ganti Profil</a>
+          <a href="<?php echo base_url().'user/daftar-transaksi'; ?>" class="list-group-item">Daftar Transaksi</a>
+          <a href="<?php echo base_url().'user/detail_transaksi'; ?>" class="list-group-item">Detail Transaksi</a>
+          <a href="<?php echo base_url().'user/pesan'; ?>" class="list-group-item">Pesan</a>
+        </div>
+        </div>
+    <div class="col-sm-10 text-left"> 
